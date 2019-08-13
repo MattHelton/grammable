@@ -10,9 +10,10 @@ class GramsController < ApplicationController
   def create 
     @gram = Gram.create(gram_params)
     if @gram.invalid?
-      flash[:error] = '<strong>Could not save</strong> the data you entered is invalid.'
+      render :new, status: :unprocessable_entity
+    else
+      redirect_to root_path
     end
-    redirect_to root_path
   end
 
   private
